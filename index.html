@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You ❤️</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: #fff0f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 30px;
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    img {
+      max-width: 300px;
+      border-radius: 10px;
+    }
+    h1, h2, h3 {
+      color: #cc005f;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="screen1" class="container active">
+    <h1>Hey Love ❤️</h1>
+    <p>I made something for you...</p>
+    <button onclick="nextScreen(2)">Start</button>
+  </div>
+
+  <div id="screen2" class="container">
+    <h2>Our Memory Lane 📸</h2>
+    <img src="ourimage.jpg" alt="Memory" />
+    <p>Remember this day?</p>
+    <button onclick="nextScreen(3)">Yes 🥹</button>
+  </div>
+
+  <div id="screen3" class="container">
+    <h2>Quick Quiz 🧠</h2>
+    <p>Where was our first date?</p>
+    <input id="answer" type="text" placeholder="Type here..." />
+    <br />
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="response"></p>
+  </div>
+
+  <div id="screen4" class="container">
+    <h2>Love Meter ❤️</h2>
+    <p>Tap to fill with love!</p>
+    <progress id="meter" value="0" max="100" style="width:80%; height: 20px;"></progress><br/>
+    <button onclick="fillMeter()">❤️ Click Me</button>
+  </div>
+
+  <div id="screen5" class="container">
+    <h1>Will You Be Mine Forever? 💍</h1>
+    <button onclick="showFinal()">Yes 💖</button>
+    <button onclick="showFinal()">Absolutely YES 🥰</button>
+  </div>
+
+  <div id="screen6" class="container">
+    <h1>YAY! 🎉</h1>
+    <h3>You just made my world more beautiful 😘</h3>
+    <p>I love you forever ❤️</p>
+  </div>
+
+  <script>
+    function nextScreen(num) {
+      document.querySelectorAll(".container").forEach(div => div.classList.remove("active"));
+      document.getElementById(`screen${num}`).classList.add("active");
+    }
+
+    function checkAnswer() {
+      const correct = "starbucks";
+      const input = document.getElementById("answer").value.toLowerCase();
+      const response = document.getElementById("response");
+      if (input.includes(correct)) {
+        response.innerText = "Yesss! You're right! 😍";
+        setTimeout(() => nextScreen(4), 1500);
+      } else {
+        response.innerText = "Hmm... try again, think harder! 😉";
+      }
+    }
+
+    let progress = 0;
+    function fillMeter() {
+      progress += 20;
+      document.getElementById("meter").value = progress;
+      if (progress >= 100) {
+        setTimeout(() => nextScreen(5), 1000);
+      }
+    }
+
+    function showFinal() {
+      nextScreen(6);
+    }
+  </script>
+
+</body>
+</html>
